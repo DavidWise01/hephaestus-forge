@@ -45,10 +45,10 @@ class AutoForge:
         order=["database","security","api","workflow","report","dashboard"]
         return [k for k in order if k in selected]
     def content(self,key,request):
-        if key=="database": return "CREATE TABLE items(id TEXT PRIMARY KEY,name TEXT,status TEXT);\\nCREATE TABLE audit(id INTEGER PRIMARY KEY,action TEXT);\\n"
-        if key=="security": return "def verify(x): return bool(x.get('id')) and x.get('status')!='denied'\\n"
-        if key=="api": return "import json\\nfrom http.server import ThreadingHTTPServer,BaseHTTPRequestHandler\\nclass H(BaseHTTPRequestHandler):\\n def do_GET(self):\\n  b=json.dumps({'status':'online','system':'autonomous-forge-generated'}).encode(); self.send_response(200); self.send_header('Content-Type','application/json'); self.send_header('Content-Length',str(len(b))); self.end_headers(); self.wfile.write(b)\\n def log_message(self,*a): pass\\nif __name__=='__main__': ThreadingHTTPServer(('127.0.0.1',8099),H).serve_forever()\\n"
-        if key=="workflow": return "def run_case(): return {'case':'demo','state':'resolved'}\\n"
+        if key=="database": return "CREATE TABLE items(id TEXT PRIMARY KEY,name TEXT,status TEXT);\nCREATE TABLE audit(id INTEGER PRIMARY KEY,action TEXT);\n"
+        if key=="security": return "def verify(x): return bool(x.get('id')) and x.get('status')!='denied'\n"
+        if key=="api": return "import json\nfrom http.server import ThreadingHTTPServer,BaseHTTPRequestHandler\nclass H(BaseHTTPRequestHandler):\n def do_GET(self):\n  b=json.dumps({'status':'online','system':'autonomous-forge-generated'}).encode(); self.send_response(200); self.send_header('Content-Type','application/json'); self.send_header('Content-Length',str(len(b))); self.end_headers(); self.wfile.write(b)\n def log_message(self,*a): pass\nif __name__=='__main__': ThreadingHTTPServer(('127.0.0.1',8099),H).serve_forever()\n"
+        if key=="workflow": return "def run_case(): return {'case':'demo','state':'resolved'}\n"
         if key=="report": return f"<html><body><h1>Generated Report</h1><p>{request}</p></body></html>"
         if key=="dashboard": return f"<html><body><h1>Autonomous Forge Dashboard</h1><p>{request}</p></body></html>"
         return request
@@ -69,7 +69,7 @@ class AutoForge:
             self.receipt("step",sid,{"plugin":pid})
         manifest={"run":rid,"request":request,"files":outputs}
         self.write(rid,"plugin:manifest","manifest.json",json.dumps(manifest,indent=2))
-        self.write(rid,"plugin:selftest","selftest_generated.py","from pathlib import Path\\nR=Path(__file__).parent\\nassert (R/'manifest.json').exists()\\nassert any((R/p).exists() for p in ['dashboard/index.html','api/server.py','database/schema.sql'])\\nprint('AUTONOMOUS GENERATED SYSTEM SELFTEST PASS')\\n")
+        self.write(rid,"plugin:selftest","selftest_generated.py","from pathlib import Path\nR=Path(__file__).parent\nassert (R/'manifest.json').exists()\nassert any((R/p).exists() for p in ['dashboard/index.html','api/server.py','database/schema.sql'])\nprint('AUTONOMOUS GENERATED SYSTEM SELFTEST PASS')\n")
         self.conn.execute("UPDATE runs SET status='verified' WHERE id=?",(rid,))
         self.receipt("run",rid,{"files":len(outputs)+2})
         self.conn.commit()

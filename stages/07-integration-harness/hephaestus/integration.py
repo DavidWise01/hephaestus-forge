@@ -33,10 +33,10 @@ class Harness:
         pid="project:"+digest({"idea":idea,"v":"0.7.0"})[:16]
         self.conn.execute("INSERT OR REPLACE INTO projects VALUES(?,?,?)",(pid,idea,"generated"))
         files=[]
-        files.append(self.write(pid,"schema","database/schema.sql","CREATE TABLE artifacts(id TEXT PRIMARY KEY,name TEXT,status TEXT);\\n"))
-        files.append(self.write(pid,"workflow","workflow.py",'def run_workflow(): return {"state":"approved"}\\n'))
-        files.append(self.write(pid,"report","report.py",'def generate_report(): return {"status":"ready"}\\n'))
-        files.append(self.write(pid,"security","security.py",'def verify(x): return bool(x.get("id"))\\n'))
+        files.append(self.write(pid,"schema","database/schema.sql","CREATE TABLE artifacts(id TEXT PRIMARY KEY,name TEXT,status TEXT);\n"))
+        files.append(self.write(pid,"workflow","workflow.py",'def run_workflow(): return {"state":"approved"}\n'))
+        files.append(self.write(pid,"report","report.py",'def generate_report(): return {"status":"ready"}\n'))
+        files.append(self.write(pid,"security","security.py",'def verify(x): return bool(x.get("id"))\n'))
         app = '''import json,sqlite3
 from pathlib import Path
 from http.server import ThreadingHTTPServer,BaseHTTPRequestHandler
@@ -77,7 +77,7 @@ def main():
 if __name__=="__main__": main()
 '''
         files.append(self.write(pid,"app","app.py",app))
-        files.append(self.write(pid,"run","run_app.py","from app import main\\nmain()\\n"))
+        files.append(self.write(pid,"run","run_app.py","from app import main\nmain()\n"))
         files.append(self.write(pid,"dashboard","dashboard/index.html",f"<html><body><h1>Generated Integrated App</h1><p>{idea}</p></body></html>"))
         test = '''from pathlib import Path
 import sqlite3,runpy
