@@ -1,0 +1,30 @@
+name: forge-selftests
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run every stage's selftest
+        run: |
+          fail=0
+          for d in stages/*/; do
+            echo "::group::$d"
+            if ( cd "$d" && python selftest.py ); then
+              echo "PASS  $d"
+            else
+              echo "FAIL  $d"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          echo "-----------------------------------------"
+          if [ "$fail" -ne 0 ]; then echo "one or more stages failed"; exit 1; fi
+          echo "all stages PASS"

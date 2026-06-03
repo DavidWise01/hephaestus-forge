@@ -1,0 +1,13 @@
+{
+  "version": "0.4.0",
+  "status": "PASS",
+  "checks": {
+    "assembly_engine": true,
+    "builder_selection": true,
+    "manufacturing": true,
+    "verification": true,
+    "release_catalog": true,
+    "dashboard": true,
+    "selftest": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": "0.8.0",
+  "status": "PASS",
+  "checks": {
+    "plugin_sdk": true,
+    "registry": true,
+    "loader": true,
+    "validator": true,
+    "permissions": true,
+    "example_plugin": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.0",
+  "status": "PASS",
+  "checks": {
+    "engine_present": true,
+    "cli_present": true,
+    "dashboard_present": true,
+    "docs_present": true,
+    "selftest_pass": true
+  }
+}

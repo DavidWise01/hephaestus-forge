@@ -1,0 +1,14 @@
+{
+  "version": "0.6.0",
+  "status": "PASS",
+  "checks": {
+    "codegen_engine": true,
+    "dashboard_generator": true,
+    "api_generator": true,
+    "database_generator": true,
+    "workflow_generator": true,
+    "report_generator": true,
+    "security_generator": true,
+    "selftest": true
+  }
+}

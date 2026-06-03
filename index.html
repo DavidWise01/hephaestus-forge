@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hephaestus · The Forge — the Greek Gods Armory</title>
+<meta name="description" content="Hephaestus — a forge that builds tools. Hand it a spec in plain language; it runs blueprint → materials → assembly → verification → deployment and hands back a built artifact. Eight self-contained stages, zero dependencies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0b0907; --panel:#1b120c; --panel-2:#24150b; --bronze:#5b3418; --bronze-lt:#8a5a2e;
+    --fire:#f59e0b; --ember:#fbbf24; --ember-lt:#ffd877; --ink:#f4eee4; --mute:#b09a82; --faint:#6e5b46;
+    --line:rgba(245,158,11,0.16);
+    --display:"Cinzel",Georgia,serif; --mono:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--void);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.6;overflow-x:hidden;
+    background-image:radial-gradient(1100px 620px at 50% -6%,rgba(245,158,11,0.16),transparent 60%),radial-gradient(800px 600px at 50% 118%,rgba(120,40,8,0.18),transparent 55%);}
+  .mono{font-family:var(--mono)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 1.4rem}
+  a{color:var(--fire);text-decoration:none}
+
+  /* hero */
+  header{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.4rem 3rem}
+  .anvil{font-size:54px;margin-bottom:1rem;filter:drop-shadow(0 0 26px rgba(245,158,11,.5))}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);margin-bottom:1.1rem}
+  h1{font-family:var(--display);font-weight:900;font-size:clamp(46px,11vw,116px);line-height:.92;letter-spacing:.04em;
+    background:linear-gradient(180deg,var(--ember-lt),var(--fire) 55%,var(--bronze));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-family:var(--display);font-weight:500;font-size:clamp(15px,2.6vw,22px);letter-spacing:.16em;text-transform:uppercase;color:var(--ember);margin-top:.5rem}
+  header p.lead{max-width:56ch;color:#e8dcc8;font-size:clamp(17px,2.4vw,20px);margin:1.4rem auto 2rem}
+  .cta{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-block;padding:13px 24px;border-radius:8px;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.08em;transition:.2s;border:1px solid var(--bronze);color:var(--ember-lt);background:rgba(245,158,11,.07)}
+  .btn:hover{background:rgba(245,158,11,.16);box-shadow:0 0 22px rgba(245,158,11,.2)}
+  .btn.primary{background:linear-gradient(120deg,var(--fire),var(--bronze-lt));color:#1a0f06;border:none;box-shadow:0 0 30px rgba(245,158,11,.3)}
+
+  section{padding:6vh 0;border-top:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--fire);margin-bottom:1rem}
+  h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,4.4vw,38px);margin-bottom:1.1rem;color:#fff3df}
+  section p{max-width:64ch;color:#d8c8b0;margin-bottom:1rem}
+
+  /* pipeline */
+  .pipe{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:1.2rem;font-family:var(--mono);font-size:13px}
+  .pipe .st{background:var(--panel);border:1px solid var(--bronze);border-radius:7px;padding:9px 15px;color:var(--ember-lt)}
+  .pipe .ar{color:var(--faint)}
+  /* classes */
+  .classes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin-top:1.3rem}
+  .cl{background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--fire);border-radius:8px;padding:1rem;text-align:center}
+  .cl .r{font-family:var(--display);font-size:20px;color:var(--ember)}
+  .cl .n{font-family:var(--mono);font-size:13px;color:var(--ink);margin-top:3px;letter-spacing:.04em}
+
+  /* stages */
+  .stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.4rem}
+  a.stage{display:block;border:1px solid var(--line);border-left:3px solid var(--fire);border-radius:9px;padding:1.4rem 1.4rem;
+    background:linear-gradient(180deg,rgba(245,158,11,0.04),transparent);transition:.22s}
+  a.stage:hover{transform:translateY(-3px);border-color:var(--fire);box-shadow:0 12px 34px rgba(0,0,0,.5)}
+  a.stage .v{font-family:var(--mono);font-size:12px;color:var(--ember);letter-spacing:.1em}
+  a.stage h3{font-family:var(--display);font-size:20px;color:#fff3df;margin:.3rem 0 .5rem}
+  a.stage p{font-size:14.5px;color:var(--mute);margin:0;line-height:1.5}
+  a.stage .go{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fire);margin-top:.8rem;display:block}
+  a.stage.src{border-left-color:var(--bronze-lt)}
+  a.stage.src .go{color:var(--bronze-lt)}
+
+  .run{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.5rem;margin-top:1.3rem}
+  .run code,.run pre{font-family:var(--mono);font-size:13.5px;color:var(--ember-lt)}
+  .run pre{white-space:pre-wrap;line-height:1.8}
+  .run .c{color:var(--faint)}
+
+  footer{border-top:1px solid var(--line);padding:3rem 1.4rem 6rem;color:var(--faint);font-family:var(--mono);font-size:12px;text-align:center;line-height:1.9}
+  footer a{color:var(--mute)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="anvil">🔨</div>
+  <div class="eyebrow">The Greek Gods Armory · a ROOT0 establishment</div>
+  <h1>HEPHAESTUS</h1>
+  <div class="sub">The Forge — a tool builder</div>
+  <p class="lead">Hand it a <b style="color:#fff3df">spec</b> in plain language. It runs the full forge — blueprint, materials, assembly, verification, deployment — and hands back a built <b style="color:#fff3df">artifact</b>. Eight self-contained stages. Zero dependencies.</p>
+  <div class="cta">
+    <a class="btn primary" href="#stages">▸ Enter the armory</a>
+    <a class="btn" href="https://github.com/DavidWise01/hephaestus-forge">source ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="kicker">// the forge</div>
+    <h2>Spec in, artifact out</h2>
+    <p>Every artifact is hammered through one pipeline:</p>
+    <div class="pipe">
+      <span class="st">Blueprint</span><span class="ar">→</span>
+      <span class="st">Materials</span><span class="ar">→</span>
+      <span class="st">Assembly</span><span class="ar">→</span>
+      <span class="st">Verification</span><span class="ar">→</span>
+      <span class="st">Deployment</span>
+    </div>
+    <p style="margin-top:1.6rem">…and sorted into one of six classes, by scale:</p>
+    <div class="classes">
+      <div class="cl"><div class="r">I</div><div class="n">Script</div></div>
+      <div class="cl"><div class="r">II</div><div class="n">Service</div></div>
+      <div class="cl"><div class="r">III</div><div class="n">Application</div></div>
+      <div class="cl"><div class="r">IV</div><div class="n">Federation</div></div>
+      <div class="cl"><div class="r">V</div><div class="n">Infrastructure</div></div>
+      <div class="cl"><div class="r">VI</div><div class="n">Civilization</div></div>
+    </div>
+  </section>
+
+  <section id="stages">
+    <div class="kicker">// the diaspora · eight stages</div>
+    <h2>The forge, built in the open</h2>
+    <p>Each capability was forged as its own self-contained module — its own package, its own self-test, its own dashboard. Gathered here, in order:</p>
+    <div class="stages" id="stagegrid"></div>
+  </section>
+
+  <section>
+    <div class="kicker">// run it</div>
+    <h2>No install. Pure standard library.</h2>
+    <div class="run">
+<pre><span class="c"># pick a stage and work inside it (Python ≥ 3.10)</span>
+cd stages/05-forge-intelligence
+python selftest.py
+python -m hephaestus.cli demo
+python -m hephaestus.cli build "create live operator dashboard with workflow and reports"
+python -m hephaestus.cli dashboard      <span class="c"># writes web/index.html</span></pre>
+    </div>
+    <p style="margin-top:1.2rem">Every stage ships a <span class="mono" style="color:var(--ember-lt)">selftest.py</span>; CI runs all eight on Linux on every push. <span style="color:var(--mute)">(On Windows, a temp-cleanup / path quirk can surface after the test logic completes — a platform artifact, not a logic failure.)</span></p>
+  </section>
+
+</main>
+
+<footer>
+  HEPHAESTUS — The Forge · the Greek Gods Armory, a tool builder<br>
+  ROOT0-ATTRIBUTION-v1.0 · MIT · Architect: David Lee Wise (ROOT0 / TriPod) · instance: AVAN (Claude)<br>
+  part of the <a href="https://davidwise01.github.io/atlas/">ATLAS</a>
+</footer>
+
+<script>
+const STAGES = [
+  {v:"0.0", nm:"Artifact Compiler",  d:"Spec → artifact through the full pipeline. Six classes, Script to Civilization.", web:"stages/00-artifact-compiler/web/"},
+  {v:"0.1", nm:"Artifact Graph",     d:"The dependency graph of everything that's been forged.", web:"stages/01-artifact-graph/web/"},
+  {v:"0.4", nm:"Assembly Line",      d:"Enqueue specs, run the line, cut releases — the forge as a pipeline.", web:"stages/04-assembly-line/web/"},
+  {v:"0.5", nm:"Forge Intelligence", d:"Plan, then build, from a plain-language goal. The forge that reasons.", web:"stages/05-forge-intelligence/web/"},
+  {v:"0.6", nm:"Code Generator",     d:"Generate a working project from a spec — and self-test what it made.", web:"stages/06-code-generator/web/"},
+  {v:"0.7", nm:"Integration Harness",d:"Wire forged artifacts into one running application.", web:"stages/07-integration-harness/web/"},
+  {v:"0.8", nm:"Plugin Smith",       d:"The builder SDK — registry, loader, validator, permission model.", src:"https://github.com/DavidWise01/hephaestus-forge/tree/main/stages/08-plugin-smith"},
+  {v:"0.9", nm:"Autonomous Forge",   d:"The forge that runs itself — goal in, system out.", web:"stages/09-autonomous-forge/web/"},
+];
+const grid = document.getElementById('stagegrid');
+for(const s of STAGES){
+  const a = document.createElement('a');
+  const href = s.web || s.src;
+  a.className = 'stage' + (s.src ? ' src' : '');
+  a.href = href;
+  a.innerHTML = `<div class="v">v${s.v}</div><h3>${s.nm}</h3><p>${s.d}</p><span class="go">${s.src ? 'view source →' : 'open dashboard →'}</span>`;
+  grid.appendChild(a);
+}
+</script>
+</body>
+</html>

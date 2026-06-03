@@ -1,0 +1,7 @@
+{
+  "name": "Hephaestus",
+  "version": "0.6.0",
+  "status": "code generator",
+  "selftest": "PASS",
+  "audit": "PASS"
+}

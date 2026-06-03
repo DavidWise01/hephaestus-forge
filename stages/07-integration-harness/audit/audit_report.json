@@ -1,0 +1,14 @@
+{
+  "version": "0.7.0",
+  "status": "PASS",
+  "checks": {
+    "integration_engine": true,
+    "generated_app": true,
+    "api_dashboard_integration": true,
+    "database_init": true,
+    "workflow_endpoint": true,
+    "report_endpoint": true,
+    "security_endpoint": true,
+    "selftest": true
+  }
+}

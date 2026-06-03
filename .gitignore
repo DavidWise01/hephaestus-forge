@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.db
+*.zip
+*.egg-info/
+.pytest_cache/
+artifacts/
+generated/
+generated_app/
+generated_system/
+releases/
+plans/
+plugins/
+_export*/

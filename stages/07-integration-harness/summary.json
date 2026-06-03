@@ -1,0 +1,7 @@
+{
+  "name": "Hephaestus",
+  "version": "0.7.0",
+  "status": "integration harness",
+  "selftest": "PASS",
+  "audit": "PASS"
+}

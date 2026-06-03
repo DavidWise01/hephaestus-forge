@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "status": "PASS",
+  "checks": {
+    "graph_engine": true,
+    "edges": true,
+    "impact": true,
+    "verify": true,
+    "dashboard": true,
+    "selftest": true
+  }
+}

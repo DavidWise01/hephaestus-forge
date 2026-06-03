@@ -1,0 +1,13 @@
+{
+  "version": "0.5.0",
+  "status": "PASS",
+  "checks": {
+    "intelligence_engine": true,
+    "decomposition": true,
+    "builder_selection": true,
+    "dependency_scheduling": true,
+    "multi_artifact_release": true,
+    "dashboard": true,
+    "selftest": true
+  }
+}
